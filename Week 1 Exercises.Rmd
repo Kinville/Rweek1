@@ -1,0 +1,190 @@
+---
+title: "Week 1 R Training"
+author: "Ryan Kinville"
+date: "5/15/2018"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+
+```
+
+```{r input, ECHO=FALSE}
+
+cars <- read_csv("C:/Users/ryank/Desktop/cars.csv")
+```
+
+```{r}
+
+#Create table of the number of cars by gear
+cars %>% 
+  count(gear)
+
+#Create table of the number of cars by carb
+cars %>% 
+  count(carb)
+
+#Create a table of vs
+cars %>% 
+  count(vs)
+
+#Create a table of am
+cars %>% 
+  count(am)
+
+#Create a table of cyl by gear
+cars %>% 
+  count(cyl,gear)
+
+#Create a table of cyl by am
+cars %>% 
+  count(cyl,am)
+
+#Create a table of cyl by vs
+cars %>% 
+  count(cyl,vs)
+
+#Create a histogram of wt
+cars %>% 
+  ggplot(aes(x=wt)) +
+  geom_histogram(fill="#741D5A")+
+  labs(x="Weight  (lbs/1000)") +
+  ggtitle("Weight of Cars") +
+  theme_minimal()
+
+#Create a histogram of mpg
+cars %>% 
+  ggplot(aes(x=mpg)) +
+  geom_histogram(fill="#741D5A")+
+  labs(x="Miles Per Gallon") +
+  ggtitle("Miles Per Gallon of Cars") +
+  theme_minimal()
+
+#Create a histogram of qsec
+cars %>% 
+  ggplot(aes(x=qsec)) +
+  geom_histogram(fill="#741D5A")+
+  labs(x="1/4 Mile Time in Seconds") +
+  ggtitle("1/4 Mile Time of Cars") +
+  theme_minimal()
+
+#Create a histogram of hp
+cars %>% 
+  ggplot(aes(x=hp)) +
+  geom_histogram(fill="#741D5A")+
+  labs(x="Horsepower") +
+  ggtitle("Horsepower of Cars") +
+  theme_minimal()
+
+#Create a table of mean mpg by cyl
+cars %>% 
+  group_by(cyl) %>% 
+  summarize(meanmpg =mean(mpg))
+
+#Graph mean mpg by cyl
+cars %>% 
+  group_by(cyl) %>% 
+  summarize(meanmpg =mean(mpg)) %>% 
+  ggplot(aes(x=cyl, y=meanmpg)) +
+  geom_col(fill="#741D5A")+
+  labs(y="Average Miles Per Gallon", x="Cylinders") +
+  ggtitle("Average Miles Per Gallon by Cylinder") +
+  theme_minimal()
+
+#Create a table of mean wt by cyl
+cars %>% 
+  group_by(cyl) %>% 
+  summarize(meanwt =mean(wt))
+
+#Graph mean wt by cyl
+cars %>% 
+  group_by(cyl) %>% 
+  summarize(meanwt =mean(wt)) %>% 
+  ggplot(aes(x=cyl, y=meanwt)) +
+  geom_col(fill="#741D5A")+
+  labs(y="Average Weight", x="Cylinders") +
+  ggtitle("Average Weight by Cylinder") +
+  theme_minimal()
+
+#Create a table of mean hp by cyl
+cars %>% 
+  group_by(cyl) %>% 
+  summarize(meanhp =mean(hp))
+
+#Graph mean hp by cyl
+cars %>% 
+  group_by(cyl) %>% 
+  summarize(meanhp =mean(hp)) %>% 
+  ggplot(aes(x=cyl, y=meanhp)) +
+  geom_col(fill="#741D5A")+
+  labs(y="Average Horsepower", x="Cylinders") +
+  ggtitle("Average Horsepower by Cylinder") +
+  theme_minimal()
+```
+
+Do any other exploratory analysis that interests you
+
+```{r}
+
+cars %>% 
+  group_by(carb) %>% 
+  summarize(meanqsec =mean(qsec))
+
+cars %>% 
+  group_by(carb) %>% 
+  summarize(meanqsec =mean(qsec)) %>% 
+  ggplot(aes(x=carb, y=meanqsec)) +
+  geom_col(fill="#741D5A")+
+  labs(y="Average 1/4 Mile Time", x="Carbureators") +
+  ggtitle("Average 1/4 Mile Time by Carbureator Count") +
+  theme_minimal()
+
+cars %>% 
+  group_by(gear) %>% 
+  summarize(meanqsec =mean(qsec))
+
+cars %>% 
+  group_by(gear) %>% 
+  summarize(meanqsec =mean(qsec)) %>% 
+  ggplot(aes(x=gear, y=meanqsec)) +
+  geom_col(fill="#741D5A")+
+  labs(y="Average 1/4 Mile Time", x="Forward Gears") +
+  ggtitle("Average 1/4 Mile Time by Forward Gear Count") +
+  theme_minimal()
+
+cars %>% 
+  group_by(am) %>% 
+  summarize(meanqsec =mean(qsec))
+
+cars %>% 
+  group_by(am) %>% 
+  summarize(meanqsec =mean(qsec)) %>% 
+  ggplot(aes(x=am, y=meanqsec)) +
+  geom_col(fill="#741D5A")+
+  labs(y="Average 1/4 Mile Time", x="Transmission") +
+  ggtitle("Average 1/4 Mile Time by Transimission Type") +
+  theme_minimal()
+
+cars %>% 
+  group_by(vs) %>% 
+  summarize(meanqsec =mean(qsec))
+
+cars %>% 
+  group_by(vs) %>% 
+  summarize(meanqsec =mean(qsec)) %>% 
+  ggplot(aes(x=vs, y=meanqsec)) +
+  geom_col(fill="#741D5A")+
+  labs(y="Average 1/4 Mile Time", x="Engine Type") +
+  ggtitle("Average 1/4 Mile Time by Engine Type") +
+  theme_minimal()
+
+
+
+```
+
